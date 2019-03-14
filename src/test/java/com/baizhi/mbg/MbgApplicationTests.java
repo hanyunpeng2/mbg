@@ -19,6 +19,7 @@ public class MbgApplicationTests {
     public void contextLoads() {
         Func func = funcMapper.selectByPrimaryKey("1");
         System.out.println(func);
+        System.out.println(123);
     }
 
 }
