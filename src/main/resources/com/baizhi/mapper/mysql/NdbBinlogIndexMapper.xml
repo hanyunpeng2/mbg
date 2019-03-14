@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.testmbg.dao.mysql.NdbBinlogIndexMapper" >
+  <resultMap id="BaseResultMap" type="com.baizhi.testmbg.entity.mysql.NdbBinlogIndex" >
+    <id column="epoch" property="epoch" jdbcType="BIGINT" />
+    <result column="Position" property="position" jdbcType="BIGINT" />
+    <result column="File" property="file" jdbcType="VARCHAR" />
+    <result column="inserts" property="inserts" jdbcType="BIGINT" />
+    <result column="updates" property="updates" jdbcType="BIGINT" />
+    <result column="deletes" property="deletes" jdbcType="BIGINT" />
+    <result column="schemaops" property="schemaops" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    epoch, Position, File, inserts, updates, deletes, schemaops
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndexExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mysql..ndb_binlog_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from mysql..ndb_binlog_index
+    where epoch = #{epoch,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from mysql..ndb_binlog_index
+    where epoch = #{epoch,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndexExample" >
+    delete from mysql..ndb_binlog_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndex" >
+    insert into mysql..ndb_binlog_index (epoch, Position, File, 
+      inserts, updates, deletes, 
+      schemaops)
+    values (#{epoch,jdbcType=BIGINT}, #{position,jdbcType=BIGINT}, #{file,jdbcType=VARCHAR}, 
+      #{inserts,jdbcType=BIGINT}, #{updates,jdbcType=BIGINT}, #{deletes,jdbcType=BIGINT}, 
+      #{schemaops,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndex" >
+    insert into mysql..ndb_binlog_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="epoch != null" >
+        epoch,
+      </if>
+      <if test="position != null" >
+        Position,
+      </if>
+      <if test="file != null" >
+        File,
+      </if>
+      <if test="inserts != null" >
+        inserts,
+      </if>
+      <if test="updates != null" >
+        updates,
+      </if>
+      <if test="deletes != null" >
+        deletes,
+      </if>
+      <if test="schemaops != null" >
+        schemaops,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="epoch != null" >
+        #{epoch,jdbcType=BIGINT},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=BIGINT},
+      </if>
+      <if test="file != null" >
+        #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="inserts != null" >
+        #{inserts,jdbcType=BIGINT},
+      </if>
+      <if test="updates != null" >
+        #{updates,jdbcType=BIGINT},
+      </if>
+      <if test="deletes != null" >
+        #{deletes,jdbcType=BIGINT},
+      </if>
+      <if test="schemaops != null" >
+        #{schemaops,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndexExample" resultType="java.lang.Integer" >
+    select count(*) from mysql..ndb_binlog_index
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update mysql..ndb_binlog_index
+    <set >
+      <if test="record.epoch != null" >
+        epoch = #{record.epoch,jdbcType=BIGINT},
+      </if>
+      <if test="record.position != null" >
+        Position = #{record.position,jdbcType=BIGINT},
+      </if>
+      <if test="record.file != null" >
+        File = #{record.file,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inserts != null" >
+        inserts = #{record.inserts,jdbcType=BIGINT},
+      </if>
+      <if test="record.updates != null" >
+        updates = #{record.updates,jdbcType=BIGINT},
+      </if>
+      <if test="record.deletes != null" >
+        deletes = #{record.deletes,jdbcType=BIGINT},
+      </if>
+      <if test="record.schemaops != null" >
+        schemaops = #{record.schemaops,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update mysql..ndb_binlog_index
+    set epoch = #{record.epoch,jdbcType=BIGINT},
+      Position = #{record.position,jdbcType=BIGINT},
+      File = #{record.file,jdbcType=VARCHAR},
+      inserts = #{record.inserts,jdbcType=BIGINT},
+      updates = #{record.updates,jdbcType=BIGINT},
+      deletes = #{record.deletes,jdbcType=BIGINT},
+      schemaops = #{record.schemaops,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndex" >
+    update mysql..ndb_binlog_index
+    <set >
+      <if test="position != null" >
+        Position = #{position,jdbcType=BIGINT},
+      </if>
+      <if test="file != null" >
+        File = #{file,jdbcType=VARCHAR},
+      </if>
+      <if test="inserts != null" >
+        inserts = #{inserts,jdbcType=BIGINT},
+      </if>
+      <if test="updates != null" >
+        updates = #{updates,jdbcType=BIGINT},
+      </if>
+      <if test="deletes != null" >
+        deletes = #{deletes,jdbcType=BIGINT},
+      </if>
+      <if test="schemaops != null" >
+        schemaops = #{schemaops,jdbcType=BIGINT},
+      </if>
+    </set>
+    where epoch = #{epoch,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.baizhi.testmbg.entity.mysql.NdbBinlogIndex" >
+    update mysql..ndb_binlog_index
+    set Position = #{position,jdbcType=BIGINT},
+      File = #{file,jdbcType=VARCHAR},
+      inserts = #{inserts,jdbcType=BIGINT},
+      updates = #{updates,jdbcType=BIGINT},
+      deletes = #{deletes,jdbcType=BIGINT},
+      schemaops = #{schemaops,jdbcType=BIGINT}
+    where epoch = #{epoch,jdbcType=BIGINT}
+  </update>
+</mapper>
